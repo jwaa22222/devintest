@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useAuth } from './AuthContext.jsx';
+import Bubbles from './components/Bubbles.jsx';
 import AuthPage from './pages/AuthPage.jsx';
 import ThrowBottle from './pages/ThrowBottle.jsx';
 import CatchBottle from './pages/CatchBottle.jsx';
@@ -16,7 +17,12 @@ export default function App() {
   const [tab, setTab] = useState('throw');
 
   if (loading) {
-    return <div className="centered">加载中…</div>;
+    return (
+      <>
+        <Bubbles />
+        <div className="centered">正在打捞海面…</div>
+      </>
+    );
   }
 
   if (!user) {
@@ -24,34 +30,43 @@ export default function App() {
   }
 
   return (
-    <div className="app">
-      <header className="app-header">
-        <h1>漂流瓶</h1>
-        <div className="user-box">
-          <span>你好，{user.username}</span>
-          <button className="link-btn" onClick={logout}>
-            退出
-          </button>
-        </div>
-      </header>
+    <>
+      <Bubbles />
+      <div className="app">
+        <header className="app-header">
+          <div className="brand">
+            <div className="brand-mark">🌊</div>
+            <div className="brand-text">
+              <h1>漂流瓶</h1>
+              <p className="tagline">DRIFT · 把心事交给大海</p>
+            </div>
+          </div>
+          <div className="user-box">
+            <span className="user-chip">👋 {user.username}</span>
+            <button className="link-btn" onClick={logout}>
+              退出
+            </button>
+          </div>
+        </header>
 
-      <nav className="tabs">
-        {TABS.map((t) => (
-          <button
-            key={t.key}
-            className={`tab ${tab === t.key ? 'active' : ''}`}
-            onClick={() => setTab(t.key)}
-          >
-            {t.label}
-          </button>
-        ))}
-      </nav>
+        <nav className="tabs">
+          {TABS.map((t) => (
+            <button
+              key={t.key}
+              className={`tab ${tab === t.key ? 'active' : ''}`}
+              onClick={() => setTab(t.key)}
+            >
+              {t.label}
+            </button>
+          ))}
+        </nav>
 
-      <main className="content">
-        {tab === 'throw' && <ThrowBottle />}
-        {tab === 'catch' && <CatchBottle />}
-        {tab === 'mine' && <MyBottles />}
-      </main>
-    </div>
+        <main className="content" key={tab}>
+          {tab === 'throw' && <ThrowBottle />}
+          {tab === 'catch' && <CatchBottle />}
+          {tab === 'mine' && <MyBottles />}
+        </main>
+      </div>
+    </>
   );
 }

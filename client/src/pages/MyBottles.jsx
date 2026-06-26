@@ -23,7 +23,7 @@ export default function MyBottles() {
     load();
   }, []);
 
-  if (loading) return <section className="card">加载中…</section>;
+  if (loading) return <section className="card">正在打捞…</section>;
   if (error) return <section className="card error">{error}</section>;
 
   return (
@@ -35,14 +35,21 @@ export default function MyBottles() {
         </button>
       </div>
 
-      {bottles.length === 0 && <p className="hint">你还没有扔过瓶子，去「扔瓶子」试试吧。</p>}
+      {bottles.length === 0 && (
+        <div className="empty">
+          <span className="emoji">🌊</span>
+          你还没有扔过瓶子，去「扔瓶子」试试吧。
+        </div>
+      )}
 
       <ul className="bottle-list">
         {bottles.map((b) => (
           <li key={b.id} className="bottle">
             <div className="bottle-msg">{b.message}</div>
             <div className="bottle-meta">
-              {b.created_at} · 被捞起 {b.picked_up} 次 · {b.replies.length} 条回复
+              <span>{b.created_at}</span>
+              <span className="badge">🎣 被捞起 {b.picked_up} 次</span>
+              <span className="badge">💌 {b.replies.length} 条回复</span>
             </div>
 
             {b.replies.length > 0 && (
