@@ -1,0 +1,287 @@
+:root {
+  --bg: #0b2a43;
+  --bg-2: #114b73;
+  --card: #ffffff;
+  --ink: #1f2937;
+  --muted: #6b7280;
+  --accent: #1e88e5;
+  --accent-dark: #1565c0;
+  --ok: #2e7d32;
+  --err: #c62828;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC',
+    'Microsoft YaHei', Roboto, Helvetica, Arial, sans-serif;
+  color: var(--ink);
+  background: linear-gradient(160deg, var(--bg), var(--bg-2));
+  min-height: 100vh;
+}
+
+.centered,
+.auth-wrap {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  padding: 1rem;
+}
+
+/* ---------- Auth ---------- */
+.auth-card {
+  background: var(--card);
+  border-radius: 16px;
+  padding: 2rem;
+  width: 100%;
+  max-width: 380px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+  color: var(--ink);
+}
+
+.auth-card h1 {
+  margin: 0 0 0.25rem;
+  text-align: center;
+}
+
+.subtitle {
+  text-align: center;
+  color: var(--muted);
+  margin-top: 0;
+}
+
+.auth-toggle {
+  display: flex;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.auth-toggle button {
+  flex: 1;
+  padding: 0.5rem;
+  border: 1px solid #d1d5db;
+  background: #f3f4f6;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+.auth-toggle button.active {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+form label {
+  display: block;
+  font-size: 0.9rem;
+  margin-bottom: 0.75rem;
+  color: var(--muted);
+}
+
+input,
+textarea {
+  width: 100%;
+  margin-top: 0.25rem;
+  padding: 0.6rem 0.7rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: inherit;
+  color: var(--ink);
+}
+
+textarea {
+  resize: vertical;
+}
+
+button.primary {
+  width: 100%;
+  padding: 0.7rem;
+  border: none;
+  background: var(--accent);
+  color: #fff;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 0.5rem;
+}
+
+button.primary:hover:not(:disabled) {
+  background: var(--accent-dark);
+}
+
+button.primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ---------- App shell ---------- */
+.app {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem;
+  color: #fff;
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.app-header h1 {
+  margin: 0;
+}
+
+.user-box {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.95rem;
+}
+
+.link-btn {
+  background: none;
+  border: none;
+  color: #bfe3ff;
+  cursor: pointer;
+  text-decoration: underline;
+  font-size: 0.9rem;
+}
+
+.tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin: 1.25rem 0;
+}
+
+.tab {
+  flex: 1;
+  padding: 0.6rem;
+  border: none;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+.tab.active {
+  background: #fff;
+  color: var(--accent-dark);
+  font-weight: 600;
+}
+
+/* ---------- Cards ---------- */
+.card {
+  background: var(--card);
+  color: var(--ink);
+  border-radius: 14px;
+  padding: 1.5rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.card h2 {
+  margin-top: 0;
+}
+
+.card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card-head .link-btn {
+  color: var(--accent);
+}
+
+.hint {
+  color: var(--muted);
+  margin-top: 0;
+}
+
+.counter {
+  text-align: right;
+  color: var(--muted);
+  font-size: 0.85rem;
+  margin: 0.25rem 0 0.5rem;
+}
+
+.error {
+  color: var(--err);
+  background: #fdecea;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  margin: 0.5rem 0;
+  font-size: 0.9rem;
+}
+
+.success {
+  color: var(--ok);
+  background: #e8f5e9;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  margin: 0.5rem 0;
+  font-size: 0.9rem;
+}
+
+/* ---------- Bottles ---------- */
+.bottle {
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 1rem;
+  margin-top: 1rem;
+  background: #f9fbfd;
+}
+
+.bottle-msg {
+  white-space: pre-wrap;
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+
+.bottle-meta {
+  color: var(--muted);
+  font-size: 0.82rem;
+  margin-top: 0.5rem;
+}
+
+.bottle-list {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0;
+}
+
+.reply-form {
+  margin-top: 0.75rem;
+}
+
+.reply-list {
+  list-style: none;
+  padding: 0.75rem 0 0;
+  margin: 0.75rem 0 0;
+  border-top: 1px dashed #d1d5db;
+}
+
+.reply {
+  font-size: 0.92rem;
+  padding: 0.35rem 0;
+  color: var(--ink);
+}
+
+.reply-author {
+  font-weight: 600;
+  color: var(--accent-dark);
+}
+
+.reply-time {
+  display: block;
+  color: var(--muted);
+  font-size: 0.75rem;
+}
