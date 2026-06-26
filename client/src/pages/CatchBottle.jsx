@@ -1,25 +1,33 @@
 import { useState } from 'react';
 import { api } from '../api.js';
+import { useRipple } from '../useRipple.js';
+import Typewriter from '../components/Typewriter.jsx';
 
 export default function CatchBottle() {
+  const ripple = useRipple();
   const [bottle, setBottle] = useState(null);
   const [reply, setReply] = useState('');
   const [info, setInfo] = useState(null);
   const [busy, setBusy] = useState(false);
   const [replied, setReplied] = useState(false);
+  const [emerging, setEmerging] = useState(false);
 
   async function handleCatch() {
     setInfo(null);
     setReplied(false);
     setReply('');
     setBusy(true);
+    setBottle(null);
+    setEmerging(true);
     try {
       const data = await api('/bottles/catch', { method: 'POST' });
+      await new Promise((r) => setTimeout(r, 700));
       setBottle(data.bottle);
     } catch (err) {
       setBottle(null);
       setInfo({ type: 'error', text: err.message });
     } finally {
+      setEmerging(false);
       setBusy(false);
     }
   }
@@ -48,7 +56,7 @@ export default function CatchBottle() {
       <h2>捞一个瓶子</h2>
       <p className="hint">从大海里随机捞起一个陌生人的瓶子。</p>
 
-      <button className="primary" onClick={handleCatch} disabled={busy}>
+      <button className="primary" onClick={(e) => { ripple(e); handleCatch(); }} disabled={busy}>
         {busy ? '打捞中…' : bottle ? '再捞一个' : '捞瓶子'}
       </button>
 
@@ -58,11 +66,18 @@ export default function CatchBottle() {
         </div>
       )}
 
+      {emerging && (
+        <div className="catch-stage">
+          <div className="catch-bottle">🍾</div>
+        </div>
+      )}
+
       {bottle && (
         <div className="bottle">
-          <div className="bottle-msg">{bottle.message}</div>
-          <div className="bottle-meta">
-            来自 <strong>{bottle.author}</strong> · {bottle.created_at}
+          <div className="catch-bottle pop">🍾</div>
+          <div className="scroll-paper">
+            <Typewriter className="paper-text" text={bottle.message} speed={38} />
+            <div className="paper-from">— {bottle.author} · {bottle.created_at}</div>
           </div>
 
           {!replied ? (
@@ -74,7 +89,7 @@ export default function CatchBottle() {
                 placeholder="给 TA 回复点什么…"
                 onChange={(e) => setReply(e.target.value)}
               />
-              <button className="primary" disabled={busy || !reply.trim()}>
+              <button className="primary" disabled={busy || !reply.trim()} onClick={ripple}>
                 寄出回复
               </button>
             </form>

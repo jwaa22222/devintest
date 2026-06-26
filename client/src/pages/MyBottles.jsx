@@ -43,8 +43,8 @@ export default function MyBottles() {
       )}
 
       <ul className="bottle-list">
-        {bottles.map((b) => (
-          <li key={b.id} className="bottle">
+        {bottles.map((b, i) => (
+          <li key={b.id} className="bottle slide-in" style={{ animationDelay: `${i * 0.07}s` }}>
             <div className="bottle-msg">{b.message}</div>
             <div className="bottle-meta">
               <span>{b.created_at}</span>
