@@ -5,6 +5,18 @@
 - **后端**：Node.js + Express + SQLite（`better-sqlite3`），JWT 账号系统
 - **前端**：React + Vite
 
+## 界面预览
+
+玻璃拟态卡片、海洋渐变背景、漂浮气泡动画与微交互。
+
+| 登录 | 扔瓶子 |
+| --- | --- |
+| ![登录页](docs/screenshots/login.png) | ![扔瓶子](docs/screenshots/throw.png) |
+
+| 捞瓶子 | 我的瓶子 |
+| --- | --- |
+| ![捞瓶子](docs/screenshots/catch.png) | ![我的瓶子](docs/screenshots/my-bottles.png) |
+
 ## 功能
 
 - 注册 / 登录（JWT，密码用 bcrypt 加密存储）
